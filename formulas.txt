@@ -1,0 +1,41 @@
+/*logica y validaciones*/ 
+
+If(IsBlank(TextInput1.Text), "Campo vacío", "Correcto")
+Switch(Dropdown1.Selected.Value, "Alta", 1, "Media", 2, "Baja", 3)
+Coalesce(TextInput1.Text, "Sin valor")
+Not(IsBlank(TextInput1.Text))
+
+/*MANIPULACION DE DATOS*/ 
+
+Filter(Clientes, Ciudad = "Madrid")
+Search(Clientes, TextInputBuscar.Text, "Nombre")
+SortByColumns(Clientes, "Nombre", Ascending)
+Lookup(Productos, ID = 123, Precio)
+Collect(MiColeccion, {Nombre: TextInput1.Text})
+ClearCollect(MiColeccion, Filter(Clientes, Activo = true))
+Remove(Clientes, ThisItem)
+
+
+/*DATOS Y CONEXION*/
+Patch(Clientes, Defaults(Clientes), {Nombre: TextInput1.Text, Ciudad: "Sevilla"})
+SubmitForm(Formulario1)
+ResetForm(Formulario1)
+Refresh(Clientes)
+
+/*VARIABLES Y CONTEXTO*/
+Set(MiVariable, "Hola")
+UpdateContext({MostrarPanel: true})
+Param("id")
+User().Email
+
+/*INTERFAZ Y FORMATO*/
+Visible: If(User().Email = "admin@empresa.com", true, false)
+ColorFade(Color.Blue, -20%)
+Concatenate("Hola ", User().FullName)
+Text(Today(), "dd/mm/yyyy")
+Notify("Datos guardados correctamente", NotificationType.Success)
+
+/*AUTOMATIZACION Y FLUJOS*/
+
+EnviarCorreo.Run(User().Email, "Asunto", "Mensaje")
+
